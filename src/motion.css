@@ -1,0 +1,101 @@
+/* Edit this file. The base layout and Vue behavior are already provided. */
+/* 01 TODO: input transition and focus ring. */
+.field input {
+  transition: border-color 180ms ease,
+              box-shadow 180ms ease;
+}
+.field input:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px #246b5220;
+}
+
+/* 02 TODO: button transition, hover lift, and active press. */
+.primary { transition: transform 180ms ease; }
+.primary:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+.primary:active:not(:disabled) {
+  transform: translateY(0) scale(.98);
+}
+
+/* 03 TODO: @keyframes shake and .is-error. */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25%, 75% { transform: translateX(-6px); }
+  50% { transform: translateX(6px); }
+}
+.is-error { animation: shake 380ms ease; }
+
+/* 04 TODO: @keyframes spin and .spinner. */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.spinner { animation: spin 800ms linear infinite; }
+
+/* 05 TODO: .panel-enter-active, .panel-leave-active,
+   .panel-enter-from, and .panel-leave-to. */
+.panel-enter-active, .panel-leave-active {
+  transition: opacity 320ms ease,
+              transform 320ms ease;
+}
+.panel-enter-from {
+  opacity: 0; transform: translateY(18px);
+}
+.panel-leave-to {
+  opacity: 0; transform: translateY(-12px);
+}
+
+/* 06 TODO: prefers-reduced-motion overrides. */
+
+/* ===== 무지개 배경 ===== */
+@keyframes rainbow-move {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+html {
+  min-height: 100%;
+  background: linear-gradient(
+    120deg,
+    #ff9a9e, #fecf6d, #fdfd96, #a8e6a1, #8fd3f4, #b39ddb, #f7a6dc, #ff9a9e
+  ) !important;
+  background-size: 400% 400% !important;
+  background-attachment: fixed;
+  animation: rainbow-move 18s ease infinite;
+}
+body { background: transparent !important; }
+.shell, .intro { background: transparent !important; }
+
+/* ===== 오른쪽 영역 배경 GIF ===== */
+.workspace {
+  background: url("./assets/bg.gif") center / cover no-repeat !important;
+}
+
+/* 이미지 위에서도 폼이 잘 읽히도록 */
+.card-shell {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(6px);
+  border-radius: 20px;
+  padding: 36px 32px;
+}
+
+/* 오른쪽 끝 노란 띠 제거 */
+.shell { max-width: none; }
+
+@media (prefers-reduced-motion: reduce) {
+
+html { animation: none; }
+
+  .field input, .primary,
+  .panel-enter-active, .panel-leave-active {
+    transition: none;
+  }
+  .is-error, .spinner { animation: none; }
+  .primary:hover:not(:disabled),
+.primary:active:not(:disabled),
+.panel-enter-from, .panel-leave-to {
+  transform: none;
+}
+}
